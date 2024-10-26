@@ -1,0 +1,110 @@
+scopeName: source.mcdp
+patterns:
+  - include: '#requiresPatterns'
+  - include: '#providesPatterns'
+  - include: '#relationshipPatterns'
+  - include: '#specialStatements'
+  - include: '#numbers'
+  - include: '#redKeywords'
+  - include: '#greenKeywords'
+  - include: '#controlKeywords'
+  - include: '#units'
+  - include: '#operators'
+  - include: '#strings'
+  - include: '#comments'
+  - include: '#makeNDPT'
+  - include: '#makePoset'
+  - include: '#makeInterface'
+  - include: '#makeNDPI'
+repository:
+  requiresPatterns:
+    patterns:
+      - match: \b(requires)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+        captures:
+          "1":
+            name: keyword.requires.mcdp
+          "2":
+            name: variable.requires.mcdp
+      - match: \b(required)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+        captures:
+          "1":
+            name: keyword.required.mcdp
+          "2":
+            name: variable.required.mcdp
+  providesPatterns:
+    patterns:
+      - match: \b(provides)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+        captures:
+          "1":
+            name: keyword.provides.mcdp
+          "2":
+            name: variable.provides.mcdp
+      - match: \b(provided)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+        captures:
+          "1":
+            name: keyword.provided.mcdp
+          "2":
+            name: variable.provided.mcdp
+  relationshipPatterns:
+    patterns:
+      - match: \b([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s+(required by)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+        captures:
+          "1":
+            name: variable.name.mcdp
+          "2":
+            name: keyword.relationship.required.mcdp
+          "3":
+            name: variable.name.mcdp
+      - match: \b([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s+(provided by)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+        captures:
+          "1":
+            name: variable.name.mcdp
+          "2":
+            name: keyword.relationship.provided.mcdp
+          "3":
+            name: variable.name.mcdp
+  specialStatements:
+    match: \b(ignore\s+unconnected)\b
+    name: keyword.control.special.mcdp
+  numbers:
+    match: \b\d*\.?\d+([eE][+-]?\d+)?\b
+    name: constant.numeric.mcdp
+  redKeywords:
+    match: \b(for)\b
+    name: keyword.control.red.mcdp
+  greenKeywords:
+    match: \b(using)\b
+    name: keyword.control.green.mcdp
+  makeNDPT:
+    match: \b(mcdp|catalog|catalogue|compact|choose|specialize)\b
+    name: keyword.control.mcdp
+  makePoset:
+    match: \b(poset|product|powerset)\b
+    name: keyword.control.mcdp
+  makeNDPI:
+    match: \b(instance)\b
+    name: keyword.control.mcdp
+  makeInterface:
+    match: \b(interface)\b
+    name: keyword.control.mcdp
+  controlKeywords:
+    match: \b(library|model|value|as|template|repo|from|import|sub|constant|variable|sum|min|max|floor|floor0|ceil|ceil0)\b
+    name: keyword.control.mcdp
+  units:
+    patterns:
+      - match: \b(m|km|W|kWh|m/s|m\*h|dimensionless|USD|EUR|\$)\b
+        name: constant.character.unit.mcdp
+  operators:
+    match: '[≤>=<+=⟼⟻,:^|`x\*]'
+    name: keyword.operator
+  strings:
+    name: string.quoted
+    begin: '"'
+    end: '"'
+    patterns:
+      - name: constant.character.escape.mcdp
+        match: \\.
+  comments:
+    patterns:
+      - name: comment.line
+        match: '#.*$'
