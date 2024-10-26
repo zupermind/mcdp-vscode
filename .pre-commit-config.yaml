@@ -1,0 +1,21 @@
+exclude: .pre-commit-config.yaml|(.*autogen.*py)
+files: (^src/.*py)|(.*yaml)
+repos:
+- hooks:
+  - {id: check-added-large-files}
+  - {id: check-case-conflict}
+  - {id: check-executables-have-shebangs}
+  - {id: check-merge-conflict}
+  - {id: check-symlinks}
+  repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.6.0
+- hooks:
+  - args: [-l, '130', -t, py312]
+    id: black
+  repo: https://github.com/psf/black
+  rev: 24.8.0
+- hooks:
+  - args: [--mapping, '2', --sequence, '2', --offset, '0', --width, '150', --preserve-quotes]
+    id: yamlfmt
+  repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
+  rev: 0.2.3
