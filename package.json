@@ -1,0 +1,30 @@
+{
+    "name": "mcdp-language",
+    "displayName": "MCDP Language",
+    "description": "Syntax highlighting for MCDP modeling language",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "mcdp",
+            "aliases": ["MCDP", "mcdp"],
+            "extensions": [".mcdp", ".mcdp_*"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "mcdp",
+            "scopeName": "source.mcdp",
+            "path": "./syntaxes/mcdp.tmLanguage.json"
+        }],
+        "themes": [{
+            "label": "MCDP Theme",
+            "uiTheme": "vs-dark",
+            "path": "./themes/mcdp-color-theme.json"
+        }]
+    }
+}
