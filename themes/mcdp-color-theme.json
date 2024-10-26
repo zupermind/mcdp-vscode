@@ -4,7 +4,7 @@
     "tokenColors": [
         {
             "scope": [
-                "keyword.requires.mcdp", 
+                "keyword.requires.mcdp",
                 "variable.requires.mcdp",
                 "keyword.provided.mcdp",
                 "variable.provided.mcdp",
@@ -63,6 +63,12 @@
             ],
             "settings": {
                 "foreground": "#9CDCFE"
+            }
+        },
+        {
+            "scope": "comment.line.number-sign.mcdp",
+            "settings": {
+                "foreground": "#6A9955"  // Standard VS Code comment green
             }
         }
     ]
