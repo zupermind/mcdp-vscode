@@ -1,7 +1,7 @@
 ---
 scopeName: source.mcdp
 patterns:
-- include: '#requiresPatterns'
+#- include: '#requiresPatterns'
 - include: '#providesPatterns'
 - include: '#relationshipPatterns'
 - include: '#specialStatements'
@@ -9,104 +9,303 @@ patterns:
 - include: '#redKeywords'
 - include: '#greenKeywords'
 - include: '#controlKeywords'
-- include: '#units'
 - include: '#operators'
-- include: '#strings'
+- include: '#operators2'
+- include: '#strings_single'
+- include: '#strings_double'
 - include: '#comments'
 - include: '#makeNDPT'
 - include: '#makePoset'
 - include: '#makeInterface'
 - include: '#makeNDPI'
+- include: '#brackets'
+- include: '#sub_instance'
+- include: '#constants'
+- include: '#constants_sets'
+- include: '#operators_prov'
+- include: '#operators_reqs'
+- include: '#numbers_unit'
 repository:
-  requiresPatterns:
-    patterns:
-    - match: \b(requires)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
-      captures:
-        "1":
-          name: keyword.requires.mcdp
-        "2":
-          name: variable.requires.mcdp
-    - match: \b(required)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
-      captures:
-        "1":
-          name: keyword.required.mcdp
-        "2":
-          name: variable.required.mcdp
+#  requiresPatterns:
+#    patterns:
+
+#    # language=regexp
+#    - match: \b(requires)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+#      captures:
+#        "1":
+#          name: keyword.control.requires
+#        "2":
+#          name: variable.rname
+#
   providesPatterns:
     patterns:
-    - match: \b(provides)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+    # language=regexp
+    - match: \b(provides)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s*(\[)(.*)(\])
       captures:
         "1":
-          name: keyword.provides.mcdp
+          name: keyword.control.provides
         "2":
-          name: variable.provides.mcdp
+          name: variable.fname
+        "3":
+          name: keyword.operator
+        "4":
+          name: keyword.control.makes_poset
+        "5":
+          name: keyword.operator
+    # language=regexp
+    - match: \b(requires)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s*(\[)(.*)(\])
+      captures:
+        "1":
+          name: keyword.control.requires
+        "2":
+          name: variable.rname
+        "3":
+          name: keyword.operator
+        "4":
+          name: keyword.control.makes_poset
+        "5":
+          name: keyword.operator
+
+    # language=regexp
     - match: \b(provided)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
       captures:
         "1":
-          name: keyword.provided.mcdp
+          name: keyword.control.provided
         "2":
-          name: variable.provided.mcdp
+          name: variable.provided
+    # language=regexp
+    - match: \b(required)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+      captures:
+        "1":
+          name: keyword.control.required
+        "2":
+          name: variable.required
+  sub_instance:
+    patterns:
+    # language=regexp
+    - match: \b(sub)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+      captures:
+        "1":
+          name: keyword.control.sub
+        "2":
+          name: variable.subname
+    # provides a, b using c
+    # language=regexp
+    - match: (provides)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s*((?:\s*,\s*[a-zA-Z_][a-zA-Z0-9_₀-₉]*)*)\s+\b(using)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+      captures:
+        "1":
+          name: keyword.control.provides
+        "2":
+          name: variable.fname
+        "3":
+          patterns:
+          - match: \s*,\s*
+            name: keyword.control.operator
+          - match: "[a-zA-Z_][a-zA-Z0-9_₀-₉]*"
+            name: variable.fname
+        "4":
+          name: keyword.control.using
+        "5":
+          name: variable.subname
+    # requires a, b for c
+    # language=regexp
+    - match: (requires)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s*((?:\s*,\s*[a-zA-Z_][a-zA-Z0-9_₀-₉]*)*)\s+\b(for)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
+      captures:
+        "1":
+          name: keyword.control.requires
+        "2":
+          name: variable.rname
+        "3":
+          patterns:
+          - match: \s*,\s*
+            name: keyword.control.operator
+          - match: "[a-zA-Z_][a-zA-Z0-9_₀-₉]*"
+            name: variable.rname
+        "4":
+          name: keyword.control.for
+        "5":
+          name: variable.subname
+    # provides a, b \n
+    # language=regexp
+    - match: (provides)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s*((?:\s*,\s*[a-zA-Z_][a-zA-Z0-9_₀-₉]*)*)\s+$
+      captures:
+        "1":
+          name: keyword.control.provides
+        "2":
+          name: variable.fname
+        "3":
+          patterns:
+          - match: \s*,\s*
+            name: keyword.control.operator
+          - match: "[a-zA-Z_][a-zA-Z0-9_₀-₉]*"
+            name: variable.fname
+    # requires a, b \n
+    # language=regexp
+    - match: (requires)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s*((?:\s*,\s*[a-zA-Z_][a-zA-Z0-9_₀-₉]*)*)\s+$
+      captures:
+        "1":
+          name: keyword.control.requires
+        "2":
+          name: variable.rname
+        "3":
+          patterns:
+          - match: \s*,\s*
+            name: keyword.control.operator
+          - match: "[a-zA-Z_][a-zA-Z0-9_₀-₉]*"
+            name: variable.rname
+
+    # provides a =
+    # language=regexp
+    - match: \b(provides)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s+(\=)
+      captures:
+        "1":
+          name: keyword.control.provides
+        "2":
+          name: variable.fname
+        "3":
+          name: keyword.operator
+    # requires a =
+    # language=regexp
+    - match: \b(requires)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s+(\=)
+      captures:
+        "1":
+          name: keyword.control.requires
+        "2":
+          name: variable.rname
+        "3":
+          name: keyword.operator
+
+#    # language=regexp
+#    - match: (requires)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s*((?:\s*,\s*[a-zA-Z_][a-zA-Z0-9_₀-₉]*)*)
+#      captures:
+#        "1":
+#          name: keyword.control.requires
+#        "2":
+#          name: variable.rname
+#        "3":
+#          patterns:
+#          - match: \s*,\s*
+#            name: keyword.control.operator
+#          - match: "[a-zA-Z_][a-zA-Z0-9_₀-₉]*"
+#            name: variable.rname
   relationshipPatterns:
     patterns:
+    # language=regexp
     - match: \b([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s+(required by)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
       captures:
         "1":
-          name: variable.name.mcdp
+          name: variable.rname
         "2":
-          name: keyword.relationship.required.mcdp
+          name: keyword.relationship.required
         "3":
-          name: variable.name.mcdp
+          name: variable.subname
+    # language=regexp
     - match: \b([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\s+(provided by)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)\b
       captures:
         "1":
-          name: variable.name.mcdp
+          name: variable.fname
         "2":
-          name: keyword.relationship.provided.mcdp
+          name: keyword.relationship.provided
         "3":
-          name: variable.name.mcdp
+          name: variable.subname
   specialStatements:
+    # language=regexp
     match: \b(ignore\s+unconnected)\b
-    name: keyword.control.special.mcdp
+    name: keyword.control.special
   numbers:
-    match: \b\d*\.?\d+([eE][+-]?\d+)?\b
-    name: constant.numeric.mcdp
-  redKeywords:
-    match: \b(for)\b
-    name: keyword.control.red.mcdp
-  greenKeywords:
-    match: \b(using)\b
-    name: keyword.control.green.mcdp
+    # language=regexp
+    match: \b(\d*\.?\d+(?:[eE][+-]?\d+)?)\s*([a-zA-Z]+(?:[²³¹⁰-⁹]|\\^[1-9])?(?:[/*][a-zA-Z]+(?:[²³¹⁰-⁹]|\\^[1-9])?)*)?\b
+    captures:
+      '1':
+        name: constant.numeric
+      '2':
+        name: constant.unit
+#
+#  numbers:
+#    # language=regexp
+#    match: \b\d*\.?\d+([eE][+-]?\d+)?\b
+#    name: constant.numeric
+#  numbers_unit:
+#    # language=regexp
+#    match: \b(\d*\.?\d+([eE][+-]?\d+)?)\s+([a-zA-Z_][a-zA-Z0-9_₀-₉]*)
+#    captures:
+#        "1":
+#            name: constant.numeric
+#        "2":
+#            name: keyword.control.makes_poset
   makeNDPT:
+    # language=regexp
     match: \b(mcdp|catalog|catalogue|compact|choose|specialize)\b
-    name: keyword.control.mcdp
+    name: keyword.control
   makePoset:
-    match: \b(poset|product|powerset)\b
-    name: keyword.control.mcdp
+    # language=regexp
+    match: \b(poset|product|powerset|Nat|Rcomp|Reals|Int|ℕ|ℝ|ℤ|dimensionless|UpperSets|LowerSets)\b
+    name: keyword.control.makes_poset
   makeNDPI:
-    # language: regex
+    # language=regexp
     match: \b(instance)\b
-    name: keyword.control.mcdp
+    name: keyword.control.instance
   makeInterface:
+    # language=regexp
     match: \b(interface)\b
-    name: keyword.control.mcdp
+    name: keyword.control.interface
   controlKeywords:
-    match: \b(library|model|value|as|template|repo|from|import|sub|constant|variable|sum|min|max|floor|floor0|ceil|ceil0)\b
-    name: keyword.control.mcdp
-  units:
-    patterns:
-    - match: \b(m|km|W|kWh|m/s|m\*h|dimensionless|USD|EUR|\$)\b
-      name: constant.character.unit.mcdp
+    # language=regexp
+    match: \b(assert_equal|code|solve|solve_f|solve_r|library|model|value|as|approx|template|repo|from|import|constant|variable|take|sum|min|max|floor|floor0|ceil|ceil0)\b
+    name: keyword.control
+  constants:
+    # language=regexp
+    match: \b(Top|Bottom|⊤|⊥|EmptySet|∅)\b
+    name: keyword.control.constants.single
+  constants_sets:
+    # language=regexp
+    match: \b(EmptySet|∅|↑|↓)\b
+    name: keyword.control.constants.sets
+#  units:
+#    patterns:
+#    # language=regexp
+#    - match: "\b(m|km|W|kWh|m/s|m\*h|dimensionless|USD|EUR|\$)\b"
+#      name: constant.character.unit
   operators:
-    match: '[≤>=<+=⟼⟻,:^|`x\*]'
+    # language=regexp
+    match: '[│\-±≥≽≤≼+=,:^|`\*]'
     name: keyword.operator
-  strings:
+  operators_prov:
+    # language=regexp
+    match: '⟻'
+    name: keyword.operator.prov
+  operators_reqs:
+    # language=regexp
+    match: '⟼'
+    name: keyword.operator.reqs
+  operators2:
+    # language=regexp
+    match: (\>\=)|(\+-)(\<\=)|(\<\-\-\|)|(\|\-\-\>)|(⟷)
+    name: keyword.operator
+
+  brackets:
+    # language=regexp
+    match: "[{}/\\[\\]\\(\\)<>⟨⟩]"
+    name: keyword.operator
+
+  strings_double:
     name: string.quoted
     begin: '"'
     end: '"'
     patterns:
-    - name: constant.character.escape.mcdp
-      match: \\.
+    - name: constant.character.escape
+      # language=regexp
+      match: "\\."
+  strings_single:
+    name: string.quoted
+    begin: "'"
+    end: "'"
+    patterns:
+    - name: constant.character.escape
+      # language=regexp
+      match: "\\."
   comments:
     patterns:
     - name: comment.line
+      # language=regexp
       match: '#.*$'

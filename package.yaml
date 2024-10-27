@@ -1,32 +1,34 @@
+---
 name: mcdp-language
 displayName: MCDP Language
 description: Syntax highlighting for MCDP modeling language
-version: 1.0.0
+version: 1.3.7
 engines:
   vscode: ^1.0.0
 categories:
-  - Programming Languages
+- Programming Languages
 contributes:
   languages:
-    - id: mcdp
-      aliases:
-        - MCDP
-        - mcdp
-      extensions:
-        - .mcdp
-        - .mcdp_template
-        - .mcdp_value
-        - .mcdp_poset
-        - .mcdp_interface
-      configuration: ./language-configuration.json
+  - id: mcdp
+    aliases:
+    - MCDP
+    - mcdp
+    extensions:
+    - .mcdp
+    - .mcdp_template
+    - .mcdp_value
+    - .mcdp_poset
+    - .mcdp_interface
+    - .mcdp_primitivedp
+    configuration: ./language-configuration.json
   grammars:
-    - language: mcdp
-      scopeName: source.mcdp
-      path: ./syntaxes/mcdp.tmLanguage.json
+  - language: mcdp
+    scopeName: source.mcdp
+    path: ./syntaxes/mcdp.tmLanguage.json
   themes:
-    - label: MCDP Theme
-      uiTheme: vs-dark
-      path: ./themes/mcdp-color-theme.json
+  - label: MCDP Theme (dark)
+    uiTheme: vs-dark
+    path: ./themes/mcdp-color-theme-dark.json
 repository:
   type: git
   url: ""

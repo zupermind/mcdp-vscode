@@ -4,7 +4,7 @@ all:
 make: all_json
 	rm *.vsix
 	vsce package
-	make clean-json
+	#make clean-json
 
 YAML_FILES := $(shell find . -name "*.yaml")
 JSON_FILES := $(YAML_FILES:.yaml=.json)
@@ -18,6 +18,7 @@ install: make
 %.json: %.yaml
 	@mkdir -p $(@D)  # Create target directory if it doesn't exist
 	yq -o=json '.' $< > $@
+	#chmod -w $@
 
 clean-json:
 	find . -name "*.json" -type f -delete

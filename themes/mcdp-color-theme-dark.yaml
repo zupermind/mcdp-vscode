@@ -1,0 +1,80 @@
+---
+#    DARK_RED = "#800400"
+#    DARK_GREEN = "#096e19"
+name: MCDP Theme (dark)
+colors: {}
+tokenColors:
+- scope: keyword.control
+  settings:
+    foreground: &blue '#569CD6'
+- scope: keyword.operator
+  settings:
+    foreground: *blue
+
+- scope:
+  - variable.subname
+  settings:
+    foreground: &orange '#FF8C00' # dark orange
+- scope:
+  - keyword.control.instance
+  - keyword.control.sub
+  settings:
+    foreground: '#cF7C00' # darker orange
+
+- scope:
+  - variable.fname
+  - variable.required
+  settings:
+    foreground: &bright-green '#00ff00'
+
+- scope:
+  - keyword.control.requires
+  - keyword.control.provided
+  - keyword.control.red
+  - keyword.control.for
+  - keyword.operator.reqs
+  settings:
+    foreground: &red '#a00400'
+- scope:
+  - variable.rname
+  - variable.provided
+  settings:
+    foreground: &bright-red '#ff0000'
+- scope:
+  - keyword.control.provides
+  - keyword.control.required
+  - keyword.control.green
+  - keyword.control.using
+  - keyword.operator.prov
+  settings:
+    foreground: &green '#09ae19'
+
+
+- scope:
+  - keyword.poset
+  - keyword.control.makes_poset
+  - constant.unit
+  settings:
+    foreground: &poset '#af00af'
+
+- scope:
+  - constant.numeric
+  - keyword.control.constants.single
+  - keyword.control.constants.sets
+  settings:
+    foreground: '#B5CEA8'
+
+- scope: string.quoted
+  settings:
+    foreground: '#C586C0'
+- scope:
+  - keyword.relationship.provided
+  settings:
+    foreground: *green
+- scope:
+  - keyword.relationship.required
+  settings:
+    foreground: *red
+- scope: comment.line
+  settings:
+    foreground: '#6A9955'
