@@ -1,8 +1,9 @@
 ---
 name: mcdp-language
 displayName: MCDP Language
-description: Syntax highlighting for MCDP modeling language
+description: Syntax highlighting for the MCDP modeling language
 version: 1.3.7
+publisher: zupermind
 engines:
   vscode: ^1.0.0
 categories:
@@ -29,6 +30,17 @@ contributes:
   - label: MCDP Theme (dark)
     uiTheme: vs-dark
     path: ./themes/mcdp-color-theme-dark.json
+license: MIT
 repository:
   type: git
-  url: ""
+  url: "https://github.com/zupermind/mcdp-vscode.git"
+bugs:
+  url: "https://github.com/zupermind/mcdp-vscode/issues"
+homepage: "https://github.com/zupermind/mcdp-vscode#readme"
+keywords:           # Helps with marketplace discovery
+- mcdp
+- syntax
+- highlighting
+author:            # Optional but recommended
+  name: Andrea Censi
+  email: andrea@zupermind.com

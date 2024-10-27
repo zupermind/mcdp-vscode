@@ -1,17 +1,17 @@
 
-all:
+all: package
 
-make: all_json
+package: all_json
 	rm *.vsix
 	vsce package
-	#make clean-json
+	make clean-json
 
 YAML_FILES := $(shell find . -name "*.yaml")
 JSON_FILES := $(YAML_FILES:.yaml=.json)
 
 all_json: $(JSON_FILES)
 
-install: make
+install: package
 	code --install-extension mcdp-language-*.vsix
 
 # Rule to convert each .yaml file to .json
