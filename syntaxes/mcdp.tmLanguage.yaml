@@ -251,7 +251,7 @@ repository:
     name: keyword.control.interface
   controlKeywords:
     # language=regexp
-    match: \b(assert_equal|code|solve|solve_f|solve_r|library|model|value|as|approx|template|repo|from|import|constant|variable|take|sum|min|max|floor|floor0|ceil|ceil0|dp|implemented-by|yaml|resource)\b
+    match: \b(add_bottom|assert_equal|code|solve|solve_f|solve_r|library|model|value|as|approx|template|repo|from|import|constant|variable|take|sum|min|max|floor|floor0|ceil|ceil0|dp|implemented-by|yaml|resource)\b
     name: keyword.control
   constants:
     # language=regexp
