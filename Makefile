@@ -4,9 +4,8 @@ all: package
 package: all_json
 	rm *.vsix
 	vsce package
-	make clean-json
 
-YAML_FILES := $(shell find . -name "*.yaml")
+YAML_FILES := ./package.yaml ./syntaxes/mcdp.tmLanguage.yaml ./themes/mcdp-color-theme-dark.yaml ./language-configuration.yaml
 JSON_FILES := $(YAML_FILES:.yaml=.json)
 
 all_json: $(JSON_FILES)
