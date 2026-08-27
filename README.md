@@ -39,9 +39,12 @@ Note that the YAML files are the original source code. Then, they are converted 
 
 ### Dependencies
 
-- The `yq` command is used to convert YAML to JSON. 
-
-
+- The `yq` command is used to convert YAML to JSON. See [Mike Farah's GitHub Repository](https://github.com/mikefarah/yq) for installation instructions.
+- [Node.js](https://nodejs.org/en/) for VS Code Extension Manager.
+- VS Code Extension Manager `vsce`. Can be installed simply with `npm` package manger:
+```
+    npm install -g @vscode/vsce
+```
 ### Installing
 
 This command creates the package:
